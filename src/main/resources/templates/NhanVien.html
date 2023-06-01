@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <th:block th:replace="Layout :: link-libraries-icon"></th:block>
+  <th:block th:replace="Layout :: link-libraries"></th:block>
+  <th:block th:replace="Layout :: link-bootstrap"></th:block>
+  <th:block th:replace="Layout :: link-css"></th:block>
+</head>
+<body>
+<nav th:fragment="teamStart">
+  <div class="container-fluid py-5">
+    <div class="container">
+      <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+        <h6 class="text-primary text-uppercase">Team Members</h6>
+        <h1 class="display-5 text-uppercase mb-0">Qualified Pets Care Professionals</h1>
+      </div>
+      <div class="owl-carousel team-carousel position-relative" style="padding-right: 25px;">
+        <div class="team-item">
+          <div th:each="sp : ${sanphams}" class="position-relative overflow-hidden">
+            <img class="img-fluid w-100" th:src="@{${sp.hinhAnh}}" alt="">
+            <div class="team-overlay">
+              <div class="d-flex align-items-center justify-content-start">
+                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
+                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
+                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+          <div th:each="loaiSp : ${loaiSps}" class="bg-light text-center p-4">
+            <h5 class="text-uppercase" th:text="${loaiSp.maLoai}"></h5>
+            <p class="m-0" th:text="${loaiSp.tenLoai}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+</html>

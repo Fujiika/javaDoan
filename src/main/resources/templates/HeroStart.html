@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+  <th:block th:replace="Layout :: link-libraries-icon"></th:block>
+  <th:block th:replace="Layout :: link-libraries"></th:block>
+  <th:block th:replace="Layout :: link-bootstrap"></th:block>
+  <th:block th:replace="Layout :: link-css"></th:block>
+</head>
+<body>
+<nav th:fragment="HeroStar">
+  <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+      <div class="row justify-content-start">
+        <div class="col-lg-8 text-center text-lg-start">
+          <h1 class="display-1 text-uppercase  mb-lg-4" style="color: white">Hair Shop</h1>
+          <h1 class="text-uppercase text-white mb-lg-4">Make Your Pets Happy</h1>
+          <p class="fs-4 text-white mb-lg-4">Dolore tempor clita lorem rebum kasd eirmod dolore diam eos kasd. Kasd clita ea justo est sed kasd erat clita sea</p>
+          <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+            <a href="" class="btn btn-outline-light border-2 py-md-3 px-md-5 me-5">Read More</a>
+            <button type="button" class="btn-play" data-bs-toggle="modal"
+                    data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+              <span></span>
+            </button>
+            <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+</body>
+</html>
