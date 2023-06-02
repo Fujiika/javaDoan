@@ -18,30 +18,30 @@
 
     <div id="layoutSidenav_content">
         <main>
-            <table class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Images</th>
-                    <th>Category</th>
-                    <th>Action</th>
-                </tr>
-                <tr th:each="sp : ${sanphams}">
-                    <td th:text="${sp.maSp}"></td>
-                    <td th:text="${sp.tenSP}"></td>
-                    <td th:text="${sp.donGia}"></td>
-                    <td th:text="${sp.hinhAnh}"></td>
-                    <td th:text="${sp.loaiSP.tenLoai}"></td>
-                    <td>
-                        <a th:href="@{/admin/edit/{id}(id=${sp.maSp})}">Edit</a> |
-                        <a th:href="@{/admin/delete/{id}(id=${sp.maSp})}"
-                           onclick="return confirm('are you sure?')">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            <form th:action="@{/admin/edit}" th:object="${sanpham}" method="post">
+                <input type="hidden" th:field="*{maSp}">
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="name">Name:</label>
+                    <input class="form-control" type="text"  th:field="*{tenSP}" id="name">
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="price">Price:</label>
+                    <input class="form-control" type="text"  th:field="*{donGia}" id="price">
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="images">Images:</label>
+                    <input class="form-control" type="text"  th:field="*{hinhAnh}" id="images">
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="loaisp">Category:</label>
+                    <select class="form-control" id="loaisp" name="ls.maLoai" th:field="*{ls.maLoai}">
+                        <option value="">--Chọn danh mục--</option>
+                        <option th:each="ls: ${loaisp}"  th:value="${ls.maLoai}" th:text="${ls.tenLoai} "
+                                th:selected="${ls.maLoai == currentCategory}"></option>
+                    </select>
+                </div>
+                <input type="submit" value="Save">
+            </form>
         </main>
         <th:block th:replace="FooterAdmin :: FooterAdmin"></th:block>
 

@@ -14,7 +14,7 @@
 <body class="sb-nav-fixed">
 <th:block th:replace="~{AdminTopBar :: Admintopbar}"></th:block>
 <div id="layoutSidenav">
-  <th:block th:replace="AdminSideBar :: AdminsideBar"></th:block>
+  <th:block th:replace="~{AdminSideBar :: AdminsideBar}"></th:block>
 
   <div id="layoutSidenav_content">
     <main>
@@ -32,17 +32,17 @@
           <input type="text" class="form-control" id="price" th:field="*{hinhAnh}">
         </div>
         <div class="col-6 mb-3">
-          <label for="category" class="form-label">Loại Sản Phẩm:</label>
-          <select class="form-control" id="category" name="lsp.maLoai">
-            <option value="">--Select Category</option>
-            <option th:each="lsp :${loaisp}" th:value="${lsp.maLoai}"
-                    th:text="${lsp.tenLoai}"></option>
+          <label for="loasp" class="form-label">Loại Sản Phẩm:</label>
+          <select class="form-control" id="loasp" name="ls.maLoai">
+            <option value="">--Chọn Loại sản phẩm--</option>
+            <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
+                    th:text="${ls.tenLoai}"></option>
           </select>
         </div>
         <input type="submit" class="btn btn-primary" value="Save">
       </form>
     </main>
-    <th:block th:replace="FooterAdmin :: FooterAdmin"></th:block>
+    <th:block th:replace="~{FooterAdmin :: FooterAdmin}"></th:block>
 
   </div>
 </div>
