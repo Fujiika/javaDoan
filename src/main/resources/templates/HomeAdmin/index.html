@@ -17,32 +17,38 @@
     <th:block th:replace="AdminSideBar :: AdminsideBar"></th:block>
 
     <div id="layoutSidenav_content">
+
         <main>
-            <table class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Images</th>
-                    <th>Category</th>
-                    <th>Action</th>
-                </tr>
-                <tr th:each="sp : ${sanphams}">
-                    <td th:text="${sp.maSp}"></td>
-                    <td th:text="${sp.tenSP}"></td>
-                    <td th:text="${sp.donGia}"></td>
-                    <td th:text="${sp.hinhAnh}"></td>
-                    <td th:text="${sp.loaiSP.tenLoai}"></td>
-                    <td>
-                        <a th:href="@{/admin/edit/{id}(id=${sp.maSp})}">Edit</a> |
-                        <a th:href="@{/admin/delete/{id}(id=${sp.maSp})}"
-                           onclick="return confirm('are you sure?')">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            </table>
+            <div class="container">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Images</th>
+                        <th>Category</th>
+                        <th style="text-align: center">Action</th>
+                    </tr>
+                    <tr th:each="sp : ${sanphams}">
+                        <td th:text="${sp.maSp}"></td>
+                        <td th:text="${sp.tenSP}"></td>
+                        <td th:text="${sp.donGia}"></td>
+                        <td th:text="${sp.hinhAnh}"></td>
+                        <td th:text="${sp.loaiSP.tenLoai}"></td>
+                        <td class="btn-wrapper">
+                            <a th:href="@{/admin/edit/{id}(id=${sp.maSp})}">Edit</a>
+                            <a th:href="@{/admin/delete/{id}(id=${sp.maSp})}"
+                               onclick="return confirm('are you sure?')">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <a class="btn-add" href="/admin/add">Add Products</a>
         </main>
+
+
         <th:block th:replace="FooterAdmin :: FooterAdmin"></th:block>
 
     </div>
@@ -56,3 +62,45 @@
 <script src="js/datatables-simple-demo.js"></script>
 </body>
 </html>
+
+<style>
+    .btn-wrapper {
+        text-align: center;
+    }
+
+    .btn-wrapper a {
+        padding: 0.6rem 2rem;
+        border-radius: 10px;
+        color: blue;
+        text-decoration: none;
+    }
+
+    .btn-wrapper a:nth-child(2) {
+        color:Red;
+    }
+
+    .btn-wrapper a:nth-child(2):hover {
+        background:red;
+        color:white;
+    }
+
+    .btn-wrapper a:hover {
+        background-color:lightblue;
+    }
+
+    .btn-add {
+        text-align: center;
+        color:blue;
+        border:1px solid lightblue;
+        text-decoration: none;
+        padding:1rem 2rem;
+        margin:1rem 2rem;
+        border-radius:10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-add:hover {
+        background-color:lightblue;
+    }
+</style>

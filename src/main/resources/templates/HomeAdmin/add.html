@@ -18,29 +18,32 @@
 
   <div id="layoutSidenav_content">
     <main>
-      <form th:action="@{/admin/add} " th:object="${sp}" method="post">
-        <div class="col-6 mb-3">
-          <label for="title" class="form-label">Tên Sản phẩm:</label>
-          <input type="text" class="form-control" id="title" th:field="*{tenSP}">
-        </div>
-        <div class="col-6 mb-3">
-          <label for="author" class="form-label">Đơn Giá:</label>
-          <input type="text" class="form-control" id="author" th:field="*{donGia}">
-        </div>
-        <div class="col-6 mb-3">
-          <label for="price" class="form-label">hình ảnh:</label>
-          <input type="text" class="form-control" id="price" th:field="*{hinhAnh}">
-        </div>
-        <div class="col-6 mb-3">
-          <label for="loasp" class="form-label">Loại Sản Phẩm:</label>
-          <select class="form-control" id="loasp" name="ls.maLoai">
-            <option value="">--Chọn Loại sản phẩm--</option>
-            <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
-                    th:text="${ls.tenLoai}"></option>
-          </select>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Save">
-      </form>
+      <div  class="wrapper-input container">
+          <form th:action="@{/admin/add} " th:object="${sp}" method="post">
+            <input type="hidden" th:field="*{maSp}">
+            <div class="wrapper-label">
+              <label for="title">Tên Sản phẩm:</label>
+              <input placeholder="vui lòng nhập tên..." type="text"  id="title" th:field="*{tenSP}">
+            </div>
+            <div class="wrapper-label">
+              <label for="author" >Đơn Giá:</label>
+              <input  placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
+            </div >
+            <div class="wrapper-label">
+              <label for="price" >hình ảnh:</label>
+              <input  placeholder="vui lòng chọn hình ảnh..." type="text"  id="price" th:field="*{hinhAnh}">
+            </div>
+            <div class="wrapper-label">
+              <label for="loasp">Loại Sản Phẩm:</label>
+              <select  id="loasp" name="ls.maLoai">
+                <option value="">--Chọn Loại sản phẩm--</option>
+                <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
+                        th:text="${ls.tenLoai}"></option>
+              </select>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Save">
+          </form>
+      </div>
     </main>
     <th:block th:replace="~{FooterAdmin :: FooterAdmin}"></th:block>
 
@@ -55,3 +58,29 @@
 <script src="js/datatables-simple-demo.js"></script>
 </body>
 </html>
+
+<style>
+  .wrapper-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  label {
+    text-align: center;
+  }
+
+  input, select {
+    width:100%;
+    border-radius:10px;
+    border:1px solid;
+    padding: 1rem 2rem;
+  }
+
+  .wrapper-label {
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+</style>
