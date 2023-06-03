@@ -33,6 +33,11 @@
               <label for="price" >hình ảnh:</label>
               <input  placeholder="vui lòng chọn hình ảnh..." type="text"  id="price" th:field="*{hinhAnh}">
             </div>
+            <div class="custom-file mb-2">
+              <input type="file" name="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Product Image</label>
+              <input type="file" class="custom-file-input">
+            </div>
             <div class="wrapper-label">
               <label for="loasp">Loại Sản Phẩm:</label>
               <select  id="loasp" name="ls.maLoai">
@@ -43,6 +48,7 @@
             </div>
             <input type="submit" class="btn btn-primary" value="Save">
           </form>
+
       </div>
     </main>
     <th:block th:replace="~{FooterAdmin :: FooterAdmin}"></th:block>
@@ -56,6 +62,8 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script scr="js/jquey-3.1.1.min.js"></script>
+
 </body>
 </html>
 

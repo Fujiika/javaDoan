@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/sanphams")
+@RequestMapping("/api/v1/sanpham")
 public class SanPhamAPI {
     @Autowired
     private SanPhamServices sanPhamServices;

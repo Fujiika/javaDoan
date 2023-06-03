@@ -33,7 +33,7 @@
                         <td th:text="${sp.maSp}"></td>
                         <td th:text="${sp.tenSP}"></td>
                         <td th:text="${sp.donGia}"></td>
-                        <td th:text="${sp.hinhAnh}"></td>
+                        <th scope="row"><img alt="" th:src="@{${sp.hinhAnh}}" style="width: 100px;height: 100px;"></th>
                         <td th:text="${sp.loaiSP.tenLoai}"></td>
                         <td class="btn-wrapper">
                             <a th:href="@{/admin/edit/{id}(id=${sp.maSp})}">Edit</a>

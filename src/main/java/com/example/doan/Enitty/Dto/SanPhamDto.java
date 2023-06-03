@@ -9,5 +9,4 @@ public class SanPhamDto {
     private  double donGia;
     private  String hinhAnh;
     private  String tenLoai;
-
 }

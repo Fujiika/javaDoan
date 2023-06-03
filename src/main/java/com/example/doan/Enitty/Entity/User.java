@@ -18,6 +18,9 @@ public class User {
     @Column(name = "TenUser")
     private String tenUser;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "Pass")
     private String pass;
 
