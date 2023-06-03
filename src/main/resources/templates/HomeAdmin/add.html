@@ -19,8 +19,9 @@
   <div id="layoutSidenav_content">
     <main>
       <div  class="wrapper-input container">
-          <form th:action="@{/admin/add} " th:object="${sp}" method="post">
-            <input type="hidden" th:field="*{maSp}">
+        <form th:action="@{/admin/add}" th:object="${sp}" method="post" enctype="multipart/form-data">
+<!--          <form th:action="@{/admin/add} " th:object="${sp}" method="post">-->
+<!--            <input type="hidden" th:field="*{maSp}">-->
             <div class="wrapper-label">
               <label for="title">Tên Sản phẩm:</label>
               <input placeholder="vui lòng nhập tên..." type="text"  id="title" th:field="*{tenSP}">
@@ -30,13 +31,11 @@
               <input  placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
             </div >
             <div class="wrapper-label">
-              <label for="price" >hình ảnh:</label>
-              <input  placeholder="vui lòng chọn hình ảnh..." type="text"  id="price" th:field="*{hinhAnh}">
-            </div>
-            <div class="custom-file mb-2">
-              <input type="file" name="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Product Image</label>
-              <input type="file" class="custom-file-input">
+                <input type="hidden" th:field="*{hinhAnh}"></input>
+              <label for="fileImage">Hình ảnh:</label>
+              <div class="custom-file mb-2">
+                  <input type="file" class="form-control" id="fileImage" name="image" accept="image/png, image/jpg">
+              </div>
             </div>
             <div class="wrapper-label">
               <label for="loasp">Loại Sản Phẩm:</label>
