@@ -69,7 +69,7 @@ public class SanPhamAPI {
         return ResponseEntity.ok(savedSanPhamDto);
     }
 
-    @PutMapping("/edit")
+    @PutMapping("/edit  ")
     @ResponseBody
     public ResponseEntity<SanPhamDto> editSanPham(@RequestBody SanPhamDto sanPhamDto) {
         SanPham sanPham = sanPhamServices.getSpById(sanPhamDto.getMaSp());

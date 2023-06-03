@@ -1,5 +1,6 @@
 package com.example.doan.Enitty.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,12 @@ public class User {
     @Column(name = "TenUser")
     private String tenUser;
 
+    @Column(name = "UserName")
+    private String userName;
+
+    @Column(name = "MatKhau")
+    private String matKhau;
+
     @Column(name = "SDT")
     private String sdt;
 
@@ -32,5 +39,6 @@ public class User {
     private Quyen quyen;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<GioHang> gioHangs = new HashSet<>();
 }

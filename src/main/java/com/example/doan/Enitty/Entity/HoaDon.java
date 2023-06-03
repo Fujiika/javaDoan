@@ -1,6 +1,7 @@
 package com.example.doan.Enitty.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,5 +26,6 @@ public class HoaDon {
     private User user;
 
     @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<ChiTietHoaDon> chiTietHoaDons = new HashSet<>();
 }

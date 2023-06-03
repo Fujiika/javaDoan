@@ -35,4 +35,20 @@ public class UserServices {
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
+
+    public boolean isUsernameTaken(String username) {
+        User user = userRepository.findByUserName(username);
+        return user != null;
+    }
+
+
+
+    public User loginUser(String username, String password) {
+        User user = userRepository.findByUserName(username);
+        if (user == null || !user.getMatKhau().equals(password)) {
+            return null;
+        } else {
+            return user;
+        }
+    }
 }

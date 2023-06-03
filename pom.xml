@@ -74,6 +74,36 @@
             <artifactId>velocity</artifactId>
             <version>1.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MadaraFsl</groupId>
+            <artifactId>HibernateUtil</artifactId>
+            <version>0.0.1-RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
