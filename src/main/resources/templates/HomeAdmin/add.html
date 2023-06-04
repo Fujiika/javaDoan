@@ -7,9 +7,9 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Dashboard - SB Admin</title>
-  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
+  <th:block th:replace="AdminTopBar :: link-style-icon"> </th:block>
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <th:block th:replace="AdminTopBar :: npmDatabase"></th:block>
 </head>
 <body class="sb-nav-fixed">
 <th:block th:replace="~{AdminTopBar :: Admintopbar}"></th:block>
@@ -19,35 +19,34 @@
   <div id="layoutSidenav_content">
     <main>
       <div  class="wrapper-input container">
-          <form th:action="@{/admin/add} " th:object="${sp}" method="post">
-            <input type="hidden" th:field="*{maSp}">
-            <div class="wrapper-label">
-              <label for="title">Tên Sản phẩm:</label>
-              <input placeholder="vui lòng nhập tên..." type="text"  id="title" th:field="*{tenSP}">
-            </div>
-            <div class="wrapper-label">
-              <label for="author" >Đơn Giá:</label>
-              <input  placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
-            </div >
-            <div class="wrapper-label">
-              <label for="price" >hình ảnh:</label>
-              <input  placeholder="vui lòng chọn hình ảnh..." type="text"  id="price" th:field="*{hinhAnh}">
-            </div>
+        <form th:action="@{/admin/add}" th:object="${sp}" method="post" enctype="multipart/form-data">
+          <!--          <form th:action="@{/admin/add} " th:object="${sp}" method="post">-->
+          <!--            <input type="hidden" th:field="*{maSp}">-->
+          <div class="wrapper-label">
+            <label for="title">Tên Sản phẩm:</label>
+            <input placeholder="vui lòng nhập tên..." type="text"  id="title" th:field="*{tenSP}">
+          </div>
+          <div class="wrapper-label">
+            <label for="author" >Đơn Giá:</label>
+            <input placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
+          </div >
+          <div class="wrapper-label">
+            <input type="hidden" th:field="*{hinhAnh}"></input>
+            <label for="fileImage">Hình ảnh:</label>
             <div class="custom-file mb-2">
-              <input type="file" name="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Product Image</label>
-              <input type="file" class="custom-file-input">
+              <input type="file" class="form-control" id="fileImage" name="image" accept="image/png, image/jpg">
             </div>
-            <div class="wrapper-label">
-              <label for="loasp">Loại Sản Phẩm:</label>
-              <select  id="loasp" name="ls.maLoai">
-                <option value="">--Chọn Loại sản phẩm--</option>
-                <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
-                        th:text="${ls.tenLoai}"></option>
-              </select>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Save">
-          </form>
+          </div>
+          <div class="wrapper-label">
+            <label for="loaisp">Loại Sản Phẩm:</label>
+            <select  id="loaisp" name="ls.maLoai" th:field="*{loaiSP.maLoai}">
+              <option value="">--Chọn Loại sản phẩm--</option>
+              <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
+                      th:text="${ls.tenLoai}"></option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Save">
+        </form>
 
       </div>
     </main>
@@ -72,7 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
   }
 
   label {

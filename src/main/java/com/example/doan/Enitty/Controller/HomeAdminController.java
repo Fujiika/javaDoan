@@ -4,6 +4,7 @@ import com.example.doan.Enitty.Entity.SanPham;
 import com.example.doan.Enitty.Repository.ISanPhamReposioty;
 import com.example.doan.Enitty.Services.LoaiSpServices;
 import com.example.doan.Enitty.Services.SanPhamServices;
+import com.example.doan.Enitty.Ultil.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,45 +45,32 @@ public class HomeAdminController {
         return "HomeAdmin/index";
     }
 
-//    @GetMapping("/add")
-//    public String addBook( SanPham sp, Model model) {
-//        model.addAttribute("sp", new SanPham());
-//        model.addAttribute("loaisp", loaiSpServices.getAllLoaiSP());
-//        return "HomeAdmin/add";
-//    }
-//    @PostMapping("/add")
-//    public String addSp(@Valid SanPham sp,
-//                        Errors error,
-//                        @RequestParam("hinhAnh") MultipartFile hinhAnh,
-//                        Model model) {
-//        if (error.hasErrors()) {
-//            model.addAttribute("loaisp", loaiSpServices.getAllLoaiSP());
-//            return "HomeAdmin/add";
-//        } else {
-//            try {
-//                // Đọc dữ liệu của tệp hình ảnh vào một mảng byte
-//                byte[] imageData = hinhAnh.getBytes();
-//
-//                // Lưu mảng byte vào cột 'hinh_anh' kiểu dữ liệu 'BLOB' trong bảng 'san_pham'
-//                sp.setHinhAnh(imageData);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            sanPhamServices.addSp(sp);
-//            return "redirect:/admin/index";
-//        }
-//    }
-//    @PostMapping("/add")
-//    public String addSp(@Valid SanPham sp, Errors error, Model model) {
-//        if (null != error && error.getErrorCount() > 0)  {
-//            model.addAttribute("loaisp", loaiSpServices.getAllLoaiSP());
-//            return "HomeAdmin/add";
-//        } else {
-//            sanPhamServices.addSp(sp);
-//            return "redirect:/admin/index";
-//        }
-//    }
+    @GetMapping("/add")
+    public String addSP(Model model) {
+        SanPham sp = new SanPham();
+        model.addAttribute("sp", sp);
+        model.addAttribute("loaisp", loaiSpServices.getAllLoaiSP());
+        return "HomeAdmin/add";
+    }
+    @PostMapping("/add")
+    public String addSP(SanPham sanPham, @RequestParam("image")MultipartFile multipartFile
+    ) throws IOException {
+        if(!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            sanPham.setHinhAnh(fileName);
+            SanPham saveSp = sanPhamServices.addSp(sanPham);
+            String upload = "img/"+sanPham.getMaSp();
+
+            FileUploadUtil.saveFile(upload, fileName, multipartFile);
+        } else {
+            if(sanPham.getHinhAnh().isEmpty()) {
+                sanPham.setHinhAnh(null);
+                sanPhamServices.addSp(sanPham);
+            }
+        }
+        sanPhamServices.addSp(sanPham);
+        return "redirect:/admin/index";
+    }
 
     @GetMapping("/edit/{id}")
     public String editSanpham(@PathVariable("id") Long id, Model model) {
@@ -96,11 +84,30 @@ public class HomeAdminController {
             return "not-found";
         }
     }
-
     @PostMapping("/edit")
-    public String editSP(@ModelAttribute("sanpham") SanPham sanPham) {
-        sanPhamServices.editSp(sanPham);
+    public String editSP(@ModelAttribute("sanpham") SanPham sanPham,
+                         @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            sanPham.setHinhAnh(fileName);
+            sanPhamServices.editSp(sanPham);
+            String upload = "img/"+sanPham.getMaSp();
+            FileUploadUtil.saveFile(upload, fileName, multipartFile);
+        } else {
+            sanPhamServices.editSp(sanPham);
+        }
         return "redirect:/admin/index";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String getProductDetails(@PathVariable("id") Long id, Model model) {
+        SanPham sanpham = sanPhamServices.getSpById(id);
+        if (sanpham != null) {
+            model.addAttribute("sanpham", sanpham);
+            return "HomeAdmin/detail";
+        } else {
+            return "not-found";
+        }
     }
 
     @GetMapping("/delete/{id}")
