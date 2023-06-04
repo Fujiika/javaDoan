@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Đăng ký tài khoản</title>
+</head>
+<body>
+<h1>Đăng ký tài khoản mới</h1>
+<form method="post" th:object="${user}" th:action="@{/register}">
+  <form method="POST" action="/register">
+    <div>
+      <label for="tenUser">Tên người dùng:</label>
+      <input type="text" id="tenUser" name="tenUser" required th:value="${user.tenUser}">
+    </div>
+    <div>
+      <label for="userName">Tên đăng nhập:</label>
+      <input type="text" id="userName" name="userName" required th:value="${user.userName}">
+    </div>
+    <div>
+      <label for="matKhau">Mật khẩu:</label>
+      <input type="password" id="matKhau" name="matKhau" required>
+    </div>
+    <div>
+      <label for="sdt">Số điện thoại:</label>
+      <input type="tel" id="sdt" name="sdt" required th:value="${user.sdt}">
+    </div>
+    <div>
+      <label for="diaChi">Địa chỉ:</label>
+      <input type="text" id="diaChi" name="diaChi" required th:value="${user.diaChi}">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required th:value="${user.email}">
+    </div>
+    <label for="quyen">Quyền:</label>
+    <select id="quyen" name="quyen.maQuyen" th:field="*{quyen.maQuyen}">
+      <option value="">-- Chọn quyền --</option>
+      <option  th:each="quyen :${quyens}" th:value="${quyen.maQuyen}"
+              th:text="${quyen.tenQuyen}"></option>
+    </select>
+    </select>
+  </div>
+  <button type="submit">Đăng ký</button>
+</form>
+</form>
+
+<p th:if="${successMessage}" style="color: green;">[[${successMessage}]]</p>
+<p th:if="${errorMessage}" style="color: red;">[[${errorMessage}]]</p>
+</body>
+</html>
+</html>

@@ -41,6 +41,13 @@ public class UserServices {
         return user != null;
     }
 
+    public User registerUser(User user) {
+        // Kiểm tra xem tên đăng nhập đã tồn tại chưa
+        if (userRepository.findByUserName(user.getUserName()) != null) {
+            return null;
+        }
+        return userRepository.save(user);
+    }
 
 
     public User loginUser(String username, String password) {

@@ -18,7 +18,7 @@
 
   <div id="layoutSidenav_content">
     <main>
-      <form th:action="@{/admin/add} " th:object="${sp}" method="post">
+      <form th:action="@{/admin/add}" th:object="${sp}" method="post">
         <div class="col-6 mb-3">
           <label for="title" class="form-label">Tên Sản phẩm:</label>
           <input type="text" class="form-control" id="title" th:field="*{tenSP}">
