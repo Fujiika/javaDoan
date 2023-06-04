@@ -7,9 +7,9 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <title>Dashboard - SB Admin</title>
-  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
-  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <th:block th:replace="AdminTopBar :: link-style-icon"> </th:block>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <th:block th:replace="AdminTopBar :: npmDatabase"></th:block>
 </head>
 <body class="sb-nav-fixed">
 <th:block th:replace="~{AdminTopBar :: Admintopbar}"></th:block>
@@ -28,7 +28,7 @@
             </div>
             <div class="wrapper-label">
               <label for="author" >Đơn Giá:</label>
-              <input  placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
+              <input placeholder="vui lòng giá không được bé hơn 0..." type="text"  id="author" th:field="*{donGia}">
             </div >
             <div class="wrapper-label">
                 <input type="hidden" th:field="*{hinhAnh}"></input>
@@ -38,8 +38,8 @@
               </div>
             </div>
             <div class="wrapper-label">
-              <label for="loasp">Loại Sản Phẩm:</label>
-              <select  id="loasp" name="ls.maLoai">
+              <label for="loaisp">Loại Sản Phẩm:</label>
+              <select  id="loaisp" name="ls.maLoai" th:field="*{loaiSP.maLoai}">
                 <option value="">--Chọn Loại sản phẩm--</option>
                 <option th:each="ls :${loaisp}" th:value="${ls.maLoai}"
                         th:text="${ls.tenLoai}"></option>

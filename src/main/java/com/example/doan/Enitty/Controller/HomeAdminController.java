@@ -5,23 +5,14 @@ import com.example.doan.Enitty.Repository.ISanPhamReposioty;
 import com.example.doan.Enitty.Services.LoaiSpServices;
 import com.example.doan.Enitty.Services.SanPhamServices;
 import com.example.doan.Enitty.Ultil.FileUploadUtil;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.Base64;
 import java.util.List;
 
 
@@ -49,10 +40,12 @@ public class HomeAdminController {
     public String addSP(Model model) {
         SanPham sp = new SanPham();
         model.addAttribute("sp", sp);
+        model.addAttribute("loaisp", loaiSpServices.getAllLoaiSP());
         return "HomeAdmin/add";
     }
     @PostMapping("/add")
-    public String addSP(SanPham sanPham, @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String addSP(SanPham sanPham, @RequestParam("image")MultipartFile multipartFile
+    ) throws IOException {
         if(!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             sanPham.setHinhAnh(fileName);
@@ -82,11 +75,30 @@ public class HomeAdminController {
             return "not-found";
         }
     }
-
     @PostMapping("/edit")
-    public String editSP(@ModelAttribute("sanpham") SanPham sanPham) {
-        sanPhamServices.editSp(sanPham);
+    public String editSP(@ModelAttribute("sanpham") SanPham sanPham,
+                         @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            sanPham.setHinhAnh(fileName);
+            sanPhamServices.editSp(sanPham);
+            String upload = "img/"+sanPham.getMaSp();
+            FileUploadUtil.saveFile(upload, fileName, multipartFile);
+        } else {
+            sanPhamServices.editSp(sanPham);
+        }
         return "redirect:/admin/index";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String getProductDetails(@PathVariable("id") Long id, Model model) {
+        SanPham sanpham = sanPhamServices.getSpById(id);
+        if (sanpham != null) {
+            model.addAttribute("sanpham", sanpham);
+            return "HomeAdmin/detail";
+        } else {
+            return "not-found";
+        }
     }
 
     @GetMapping("/delete/{id}")
