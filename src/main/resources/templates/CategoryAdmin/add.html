@@ -14,33 +14,24 @@
 <body class="sb-nav-fixed">
 <th:block th:replace="~{AdminTopBar :: Admintopbar}"></th:block>
 <div id="layoutSidenav">
-    <th:block th:replace="AdminSideBar :: AdminsideBar"></th:block>
+    <th:block th:replace="~{AdminSideBar :: AdminsideBar}"></th:block>
 
     <div id="layoutSidenav_content">
-
         <main>
-            <div class="container">
-                <table class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Images</th>
-                        <th>Category</th>
-                    </tr>
-                    <tr th:each="sp : ${sanpham}">
-                        <td th:text="${sp.maSp}"></td>
-                        <td th:text="${sp.tenSP}"></td>
-                        <td th:text="${sp.donGia}"></td>
-                        <th scope="row"><img alt="" th:src="@{${sp.hinhAnh}}" style="width: 100px;height: 100px;"></th>
-                        <td th:text="${sp.loaiSP.tenLoai}"></td>
-                    </tr>
-                </table>
+            <div  class="wrapper-input container">
+                <form th:action="@{/adminLSP/add}" th:object="${loaiSP}" method="post">
+                    <!--<form th:action="@{/admin/add} " th:object="${sp}" method="post">-->
+                    <!--<input type="hidden" th:field="*{maSp}">-->
+                    <div class="wrapper-label">
+                        <label for="author" >Category Name</label>
+                        <input placeholder="vui lòng nhập loại sản phẩm..." type="text"  id="author" th:field="*{tenLoai}">
+                    </div >
+                    <input type="submit" class="btn btn-primary" value="Save">
+                </form>
+
             </div>
         </main>
-
-
-        <th:block th:replace="FooterAdmin :: FooterAdmin"></th:block>
+        <th:block th:replace="~{FooterAdmin :: FooterAdmin}"></th:block>
 
     </div>
 </div>
@@ -53,3 +44,29 @@
 <script src="js/datatables-simple-demo.js"></script>
 </body>
 </html>
+
+<style>
+    .wrapper-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    label {
+        text-align: center;
+    }
+
+    input, select {
+        width:100%;
+        border-radius:10px;
+        border:1px solid;
+        padding: 1rem 2rem;
+    }
+
+    .wrapper-label {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+</style>

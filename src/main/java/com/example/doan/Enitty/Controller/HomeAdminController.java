@@ -5,12 +5,10 @@ import com.example.doan.Enitty.Repository.ISanPhamReposioty;
 import com.example.doan.Enitty.Services.LoaiSpServices;
 import com.example.doan.Enitty.Services.SanPhamServices;
 import com.example.doan.Enitty.Utils.FileUploadUtil;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,7 +52,7 @@ public class HomeAdminController {
             SanPham saveSp = sanPhamServices.addSp(sanPham);
             String upload = "img/"+sanPham.getMaSp();
 
-            FileUploadUtil.saveFile(upload, fileName, multipartFile);
+            FileUploadUtil.saveFile( upload, fileName, multipartFile);
         } else {
             if(sanPham.getHinhAnh().isEmpty()) {
                 sanPham.setHinhAnh(null);
