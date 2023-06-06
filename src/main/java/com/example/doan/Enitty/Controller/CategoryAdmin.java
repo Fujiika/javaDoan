@@ -18,19 +18,23 @@ import java.util.List;
 public class CategoryAdmin  {
     @Autowired
     LoaiSpServices loaiSpServices;
+
     @Autowired
     SanPhamServices sanPhamServices;
+
     @GetMapping("/loaisp")
     public String showLoaiSP(Model model) {
         List<LoaiSP> loaiSPS = loaiSpServices.getAllLoaiSP();
         model.addAttribute("loaisp", loaiSPS);
         return "CategoryAdmin/index";
     }
+
     @GetMapping("/add")
     public String addLoaiSP(Model model) {
         model.addAttribute("loaiSP", new LoaiSP());
         return "CategoryAdmin/add";
     }
+
     @PostMapping("/add")
     public String addLoaiSPForm(@Valid LoaiSP loaiSP, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -40,6 +44,7 @@ public class CategoryAdmin  {
             return "redirect:/adminLSP/loaisp";
         }
     }
+
     @GetMapping("/edit/{id}")
     public String editLoaiSP(@PathVariable("id") Long id, Model model) {
         LoaiSP sp = loaiSpServices.getCategoryById(id);
@@ -51,11 +56,13 @@ public class CategoryAdmin  {
             return "not-found";
         }
     }
+
     @PostMapping("/edit")
     public String editLSP(@ModelAttribute("book") LoaiSP sp) {
         loaiSpServices.editCategory(sp);
         return "redirect:/admin/index";
     }
+
     @GetMapping("/delete/{id}")
     public String delelteSP(@PathVariable("id") Long id) {
         sanPhamServices.deleteSp(id);

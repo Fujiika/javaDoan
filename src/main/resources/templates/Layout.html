@@ -52,7 +52,16 @@
                         <a href="detail.html" class="dropdown-item">Blog Detail</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">Contact <i class="bi bi-arrow-right"></i></a>
+                <form th:action="@{/cart/add-to-cart}" method="post" class="d-inline">
+                    <input type="hidden" name="id" th:value="${book.getId()}">
+                    <input type="hidden" name="name"
+                           th:value="${book.getTitle()}">
+                    <input type="hidden" name="price"
+                           th:value="${book.getPrice()}">
+                    <button type="submit" class="btn btn-success"
+                            onclick="return confirm('Are you sure you want to add this book to cart?')">Add to cart</button>
+                </form>
+                <a href="contact.html" class="nav-item nav-link nav-contact bg-primary text-white px-5 ms-lg-5">Cart <i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
     </nav>
